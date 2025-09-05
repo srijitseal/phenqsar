@@ -209,10 +209,6 @@ def load_data():
     drug_hits = download_from_drive("1wes2i7QMFBsMWpvw2rDddfOwPRfK2Omh", is_gzipped=False)
     progress_bar.progress(0.66)
     
-    # Download main data last (largest file)
-    status_text.text("Loading 3/3: Main dataset (this may take longer)...")
-    data = download_from_drive("1QzgkBkSKiUE4kk40VDMsT_nQTB-C1cXI", is_gzipped=True)
-    progress_bar.progress(1.0)
     
     status_text.text("✅ All files loaded successfully!")
     progress_bar.empty()
