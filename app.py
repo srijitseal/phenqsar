@@ -93,6 +93,56 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+# Demo toggle at the top
+st.markdown("""
+<style>
+.demo-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 12px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.toggle-switch {
+    position: relative;
+    width: 50px;
+    height: 26px;
+    background-color: #28a745;
+    border-radius: 13px;
+    cursor: not-allowed;
+    transition: background-color 0.3s;
+}
+
+.toggle-slider {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 22px;
+    height: 22px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.toggle-label {
+    font-size: 16px;
+    color: #2E86C1;
+}
+</style>
+
+<div class="demo-toggle">
+    <span class="toggle-label"> Select version </span>
+    <div class="toggle-switch">
+        <div class="toggle-slider"></div>
+    </div>
+    <span class="toggle-label">Using demo app with a mini dataset with 150 features</span>
+</div>
+""", unsafe_allow_html=True)
+
 # Description box
 st.markdown("""
 <div class="description-box">
@@ -179,12 +229,12 @@ def load_data():
     """Load data from Google Drive"""
     try:
         # Try local files first as fallback
-        if (os.path.exists("./data/Median_JCP_JUMPCP_all_source_compounds_orf_crisprs_profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony.csv.gz") and 
+        if (os.path.exists("./data/mini_Median_JCP_JUMPCP_all_source_compounds_orf_crisprs_profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony_150features.csv.gz") and 
             os.path.exists("./data/compound.csv.gz") and 
             os.path.exists("./data/knowndrughits.csv")):
             
-            st.info("Using local data files")
-            data = pd.read_csv("./data/Median_JCP_JUMPCP_all_source_compounds_orf_crisprs_profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony.csv.gz")
+            st.info("Using local mini demo data files")
+            data = pd.read_csv("./data/mini_Median_JCP_JUMPCP_all_source_compounds_orf_crisprs_profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony_150features.csv.gz")
             meta = pd.read_csv("./data/compound.csv.gz").dropna()
             drug_hits = pd.read_csv("./data/knowndrughits.csv")
             return data, meta, drug_hits
@@ -210,8 +260,8 @@ def load_data():
     progress_bar.progress(0.66)
     
     # Download main data last (largest file)
-    status_text.text("Loading 3/3: Main dataset (this may take longer)...")
-    data = download_from_drive("1QzgkBkSKiUE4kk40VDMsT_nQTB-C1cXI", is_gzipped=True)
+    status_text.text("Loading 3/3: Mini dataset...")
+    data = download_from_drive("1U1HGmpAtCUAEXjWglr_fx9tEPzunrq0e", is_gzipped=True)
     progress_bar.progress(1.0)
     
     status_text.text("✅ All files loaded successfully!")
@@ -227,7 +277,7 @@ if 'data_loaded' not in st.session_state:
 
 # Load data only once and cache in session state
 if not st.session_state.data_loaded:
-    with st.spinner("Loading data from Google Drive...This may take a few minutes"):
+    with st.spinner("Loading data..."):
         data, meta, drug_hits = load_data()
         
         data = data.drop(columns="Metadata_JCP2022")
