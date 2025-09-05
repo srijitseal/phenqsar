@@ -139,7 +139,7 @@ st.markdown("""
     <div class="toggle-switch">
         <div class="toggle-slider"></div>
     </div>
-    <span class="toggle-label">Using demo app with a mini dataset with 150 features</span>
+    <span class="toggle-label">Using demo app with a mini dataset with 40 features</span>
 </div>
 """, unsafe_allow_html=True)
 
@@ -229,12 +229,12 @@ def load_data():
     """Load data from Google Drive"""
     try:
         # Try local files first as fallback
-        if (os.path.exists("./data/mini_Median_JCP_JUMPCP_all_source_compounds_orf_crisprs_profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony_150features.csv.gz") and 
+        if (os.path.exists("./data/mini_Median_JCP_JUMPCP_all_source_compounds_orf_crisprs_profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony_40features.csv.gz") and 
             os.path.exists("./data/compound.csv.gz") and 
             os.path.exists("./data/knowndrughits.csv")):
             
             st.info("Using local mini demo data files")
-            data = pd.read_csv("./data/mini_Median_JCP_JUMPCP_all_source_compounds_orf_crisprs_profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony_150features.csv.gz")
+            data = pd.read_csv("./data/mini_Median_JCP_JUMPCP_all_source_compounds_orf_crisprs_profiles_wellpos_cc_var_mad_outlier_featselect_sphering_harmony_40features.csv.gz")
             meta = pd.read_csv("./data/compound.csv.gz").dropna()
             drug_hits = pd.read_csv("./data/knowndrughits.csv")
             return data, meta, drug_hits
@@ -261,7 +261,7 @@ def load_data():
     
     # Download main data last (largest file)
     status_text.text("Loading 3/3: Mini dataset...")
-    data = download_from_drive("1U1HGmpAtCUAEXjWglr_fx9tEPzunrq0e", is_gzipped=True)
+    data = download_from_drive("1ss6Lvn6yF3ZYPncP-EAMuF25MRfkrIju", is_gzipped=True)
     progress_bar.progress(1.0)
     
     status_text.text("✅ All files loaded successfully!")
