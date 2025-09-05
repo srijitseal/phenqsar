@@ -36,7 +36,6 @@ PhenQSAR finds potential drug candidates by comparing how compounds affect cells
 1. Clone the repository:
 ```bash
 git clone https://github.com/srijitseal/phenqsar.git
-cd phenqsar/Web_App
 ```
 
 2. Install dependencies:
@@ -109,7 +108,7 @@ The dataset undergoes preprocessing steps indicated in the filename:
 ## Project Structure
 
 ```
-phenqsar/Web_App/
+phenqsar/
 ├── app.py                    # Main application
 ├── requirements.txt          # Dependencies
 ├── logo.png                 # App logo
