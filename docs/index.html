@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PhenQSAR - Phenotypic drug discovery platform for identifying potential therapeutic compounds through Cell Painting analysis.">
+    <title>PhenQSAR - Phenotypic Drug Discovery</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.6;
+            color: #e0e6ed;
+            background: #0a0a0a;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 80px 0;
+            color: #e0e6ed;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #00d4ff;
+            letter-spacing: -0.02em;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-bottom: 40px;
+            opacity: 0.8;
+            color: #9ca3af;
+        }
+        
+        .demo-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid #00d4ff;
+            border-radius: 4px;
+            padding: 8px 16px;
+            margin-bottom: 40px;
+            font-weight: 400;
+            font-size: 0.9rem;
+            color: #00d4ff;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #00d4ff;
+            color: #0a0a0a;
+            padding: 16px 32px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            border: 1px solid #00d4ff;
+        }
+        
+        .cta-button:hover {
+            background: transparent;
+            color: #00d4ff;
+            transform: translateY(-1px);
+        }
+        
+        .content {
+            background: #111111;
+            border: 1px solid #1a1a1a;
+            border-radius: 8px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+        }
+        
+        .section h2 {
+            color: #00d4ff;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .section h3 {
+            color: #ffffff;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .section p {
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            color: #9ca3af;
+            line-height: 1.7;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .feature {
+            background: #1a1a1a;
+            padding: 24px;
+            border-radius: 4px;
+            border-left: 2px solid #00d4ff;
+            transition: all 0.2s ease;
+        }
+        
+        .feature:hover {
+            border-left: 2px solid #ffffff;
+            background: #1f1f1f;
+        }
+        
+        .feature h4 {
+            color: #ffffff;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .stat {
+            text-align: center;
+            background: #1a1a1a;
+            color: #e0e6ed;
+            padding: 24px;
+            border-radius: 4px;
+            border: 1px solid #2a2a2a;
+        }
+        
+        .stat-number {
+            font-size: 2.4rem;
+            font-weight: 600;
+            display: block;
+            color: #00d4ff;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            color: #9ca3af;
+        }
+        
+        .methodology {
+            background: #1a1a1a;
+            padding: 32px;
+            border-radius: 4px;
+            margin: 32px 0;
+            border: 1px solid #2a2a2a;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #6b7280;
+            border-top: 1px solid #1a1a1a;
+            margin-top: 60px;
+        }
+        
+        .footer a {
+            color: #00d4ff;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .content {
+                padding: 30px;
+            }
+            
+            .section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <img src="logo.png" alt="PhenQSAR Logo" style="width: 300px; margin-bottom: 20px;">
+            <div class="subtitle">Phenotypic Drug Discovery Platform</div>
+            
+            <div class="demo-badge">
+                <span>DEMO</span>
+                <span>40 Features Dataset</span>
+            </div>
+            
+            <a href="https://phenqsar.streamlit.app/" class="cta-button" target="_blank">
+                LAUNCH DEMO
+            </a>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2>About PhenQSAR</h2>
+                <p>PhenQSAR is a platform that finds potential drug candidates by comparing how compounds affect cells. The basic idea is simple: if a compound changes cells in the same way as turning a gene on or off, that compound might be useful for targeting that gene.</p>
+                
+                <div class="methodology">
+                    <h3>How It Works</h3>
+                    <p>The platform compares how compounds change cell appearance against what happens when genes are knocked out (CRISPR) or overexpressed (ORF). This helps find molecules that either copy or oppose the effects of genetic changes.</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>Key Features</h2>
+                <div class="features">
+                    <div class="feature">
+                        <h4>Gene-Based Search</h4>
+                        <p>Enter a gene name to find compounds that affect cells in similar or opposite ways to that gene.</p>
+                    </div>
+                    
+                    <div class="feature">
+                        <h4>Gene Knockout & Overexpression</h4>
+                        <p>Compare compounds against both gene knockout and gene overexpression data to find different types of useful compounds.</p>
+                    </div>
+                    
+                    <div class="feature">
+                        <h4>Chemical Structure Matching</h4>
+                        <p>Find compounds that are chemically similar to known drugs by comparing their molecular structures.</p>
+                    </div>
+                    
+                    <div class="feature">
+                        <h4>Visual Results</h4>
+                        <p>View molecular structures, similarity scores, and summary statistics in an easy-to-understand format.</p>
+                    </div>
+                    
+                    <div class="feature">
+                        <h4>Known Drug Database</h4>
+                        <p>Compare results with existing drugs to validate findings and identify proven compounds.</p>
+                    </div>
+                    
+                    <div class="feature">
+                        <h4>Similarity Analysis</h4>
+                        <p>Calculate how similar compounds are to gene effects and assess their drug-like properties.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>Dataset Overview</h2>
+                <div class="stats">
+                    <div class="stat">
+                        <span class="stat-number">40</span>
+                        <span class="stat-label">Cell Painting Features</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">116K+</span>
+                        <span class="stat-label">Compounds</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">11K+</span>
+                        <span class="stat-label">Known Drug Hits</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">138K+</span>
+                        <span class="stat-label">Profiles (Demo)</span>
+                    </div>
+                </div>
+                
+                <h3>Data Processing</h3>
+                <p>The dataset is processed through multiple steps:</p>
+                <ul style="margin-left: 30px; margin-top: 15px;">
+                    <li><strong>wellpos</strong> - Position correction</li>
+                    <li><strong>var</strong> - Variance adjustment</li>
+                    <li><strong>mad</strong> - Outlier detection</li>
+                    <li><strong>outlier</strong> - Outlier removal</li>
+                    <li><strong>featselect</strong> - Feature selection</li>
+                    <li><strong>sphering</strong> - Data normalization</li>
+                    <li><strong>harmony</strong> - Batch correction</li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2>Technical Implementation</h2>
+                <h3>Similarity Scoring</h3>
+                <p><strong>Cell Similarity:</strong> Compares how similar cell changes are between genes and compounds. Scores range from -1 to +1, where positive scores mean similar effects and negative scores mean opposite effects.</p>
+                
+                <p><strong>Chemical Similarity:</strong> Compares molecular structures to find chemically similar compounds. A score above 0.55 indicates high structural similarity.</p>
+                
+                <h3>Analysis Settings</h3>
+                <ul style="margin-left: 30px;">
+                    <li><strong>Minimum similarity:</strong> Greater than 0.2</li>
+                    <li><strong>Gene knockout results:</strong> Top and bottom 100 compounds</li>
+                    <li><strong>Gene overexpression results:</strong> Top and bottom 20 compounds</li>
+                    <li><strong>Compound size filter:</strong> Molecular weight less than 1000</li>
+                    <li><strong>High similarity threshold:</strong> Greater than 0.5</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>PhenQSAR - Advancing drug discovery through phenotypic similarity analysis</p>
+            <p><a href="https://phenqsar.streamlit.app/" target="_blank">Try the Demo App</a> | Built with Cell Painting Technology</p>
+        </div>
+    </div>
+</body>
+</html>
