@@ -86,7 +86,7 @@ st.markdown(
     <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
         <img src="data:image/png;base64,{logo_b64}" width="300" />
         <div style="font-size:20px; font-weight:600; text-align:center;">
-            The Dating App for Genes – <span style="font-weight:500;">Cell Painting Focus</span>
+            The Matching App for Genes – <span style="font-weight:500;">Find A Phenotypic Match!</span>
         </div>
     </div>
     """,
