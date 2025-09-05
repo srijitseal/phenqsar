@@ -209,6 +209,10 @@ def load_data():
     drug_hits = download_from_drive("1wes2i7QMFBsMWpvw2rDddfOwPRfK2Omh", is_gzipped=False)
     progress_bar.progress(0.66)
     
+    # Download main data last (largest file)
+    status_text.text("Loading 3/3: Main dataset (this may take longer)...")
+    data = download_from_drive("1QzgkBkSKiUE4kk40VDMsT_nQTB-C1cXI", is_gzipped=True)
+    progress_bar.progress(1.0)
     
     status_text.text("✅ All files loaded successfully!")
     progress_bar.empty()
@@ -216,23 +220,55 @@ def load_data():
     
     return data, meta, drug_hits
 
-with st.spinner("Loading data from Google Drive...This may take a few minutes"):
-    data, meta, drug_hits = load_data() 
+# Initialize session state
+if 'data_loaded' not in st.session_state:
+    st.session_state.data_loaded = False
+    st.session_state.all_genes = []
 
-data = data.drop(columns="Metadata_JCP2022")
-data = data.groupby(["Name", "Type"]).median().reset_index()
+# Load data only once and cache in session state
+if not st.session_state.data_loaded:
+    with st.spinner("Loading data from Google Drive...This may take a few minutes"):
+        data, meta, drug_hits = load_data()
+        
+        data = data.drop(columns="Metadata_JCP2022")
+        data = data.groupby(["Name", "Type"]).median().reset_index()
 
-compounds = data[data["Type"] == "Compound"]
-crisprs = data[data["Type"] == "CRISPR"]
-orfs = data[data["Type"] == "ORF"]
-compound_descriptors = compounds.iloc[:, 2:].values
+        compounds = data[data["Type"] == "Compound"]
+        crisprs = data[data["Type"] == "CRISPR"]
+        orfs = data[data["Type"] == "ORF"]
+        compound_descriptors = compounds.iloc[:, 2:].values
 
-# Get unique gene names from CRISPR and ORF data
-crispr_genes = set(crisprs["Name"].unique())
-orf_genes = set(orfs["Name"].unique())
-all_genes = sorted(list(crispr_genes.union(orf_genes)))
+        # Get unique gene names from CRISPR and ORF data
+        crispr_genes = set(crisprs["Name"].unique())
+        orf_genes = set(orfs["Name"].unique())
+        all_genes = sorted(list(crispr_genes.union(orf_genes)))
+        
+        # Store in session state
+        st.session_state.data = data
+        st.session_state.meta = meta  
+        st.session_state.drug_hits = drug_hits
+        st.session_state.compounds = compounds
+        st.session_state.crisprs = crisprs
+        st.session_state.orfs = orfs
+        st.session_state.compound_descriptors = compound_descriptors
+        st.session_state.crispr_genes = crispr_genes
+        st.session_state.orf_genes = orf_genes
+        st.session_state.all_genes = all_genes
+        st.session_state.data_loaded = True
 
-st.success(f"Data loaded successfully! Found {len(crispr_genes)} CRISPR genes and {len(orf_genes)} ORF genes.")
+        st.success(f"Data loaded successfully! Found {len(crispr_genes)} CRISPR genes and {len(orf_genes)} ORF genes.")
+else:
+    # Use cached data from session state
+    data = st.session_state.data
+    meta = st.session_state.meta
+    drug_hits = st.session_state.drug_hits
+    compounds = st.session_state.compounds
+    crisprs = st.session_state.crisprs
+    orfs = st.session_state.orfs
+    compound_descriptors = st.session_state.compound_descriptors
+    crispr_genes = st.session_state.crispr_genes
+    orf_genes = st.session_state.orf_genes
+    all_genes = st.session_state.all_genes
 
 # Input section with better styling
 st.markdown("### Select Target Gene")
